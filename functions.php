@@ -247,7 +247,7 @@ function wp_pagination_navi($num_page_links = 5, $min_max_offset = 2){
 		}
 		// More than one page -> render pagination
 		if ( $total_pages > 1 ) {
-			echo '<nav class="pagination_navi">';
+			echo '<div class="data" data-pages="'.$total_pages.'" data-page_now="'.$current_page.'"></div><nav class="pagination_navi">';
            	if ( $current_page > 1 ) {
 				echo '<a href="' .get_pagenum_link($current_page-1) .'" title="previous">&laquo;</a>';
 			}

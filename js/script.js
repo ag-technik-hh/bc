@@ -7,6 +7,31 @@ $(document).ready(function(){
 		$('.category-description').find('.meta-thumbnail-caption').appendTo('#category-image');
 	}
 
+	var load_data = false;
+	$(document).scroll(function() {
+	var s = $(window).scrollTop(),
+        d = $(document).height(),
+        c = $(window).height();
+        scrollPercent = (s / (d-c)) * 100;
+        if(scrollPercent > 70 && $(".data").data("pages") > $(".data").data("page_now"))
+	    {
+	    	load_data = true;
+	    	var num = $(".data").data("page_now") + 1;
+	    	$.get('/?paged='+num,function(data) {
+			    var posts = $(data).find('#content-posts');
+			    $('#content-posts').append(posts);
+			});
+			$(".data").data("page_now", num);
+			load_data = false;
+
+        }
+	console.log("scroll "+ scrollPercent);
+	console.log("pages "+ $(".data").data("pages"));
+	console.log("pages "+ $(".data").data("page_now"));
+
+
+	});
+
 	/* Toggle Menu */
 	$('.menu-toggle').smoothScroll().click(function () {
 		$('#main-nav div').slideToggle('200');
