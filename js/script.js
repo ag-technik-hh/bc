@@ -25,9 +25,6 @@ $(document).ready(function(){
 			load_data = false;
 
         }
-	console.log("scroll "+ scrollPercent);
-	console.log("pages "+ $(".data").data("pages"));
-	console.log("pages "+ $(".data").data("page_now"));
 
 
 	});

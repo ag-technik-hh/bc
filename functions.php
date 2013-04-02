@@ -12,6 +12,30 @@ load_theme_textdomain('scapegoat', TEMPLATEPATH .'/languages');
 /* add "editor-style.css" for the admin-interface */
 add_editor_style();
 
+function similar_articles($id)
+{	
+	$id = (int) $id;
+	if($id > 0)	
+	{
+		$tags = wp_get_post_tags($id);
+		if ($tags) {
+			echo 'Related Posts <br>';
+			$args=array(
+			'tag_in'	=> array($tags),
+			'post_not_in'	=> array($post->ID),
+			'showposts'	=> 5,
+			'ignore_sticky_posts'	=> 1
+			);
+			$my_query = new WP_Query($args);
+			return $my_query;
+		}
+	}
+	else
+	{
+		return false;
+	}
+}
+
 /* add a favicon for the admin area */
 function favicon4admin() {
 	echo '<link rel="Shortcut Icon" type="image/x-icon" href="' . get_bloginfo('template_directory') . '/favicon.ico" />';
