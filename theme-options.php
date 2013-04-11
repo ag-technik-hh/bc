@@ -40,17 +40,23 @@ function scapegoat_category_options_page()
 		 $options = get_option( 'scapegoat_category_options' ); 
 		 $options[$_POST["cat"]] = $_POST["scapegoat_category_options"][$_POST["cat"]];
 		 update_option('scapegoat_category_options',$options);
+	//       	var_dump($_POST);
+	//	var_dump($options);
+		
 	}
 
 
 	?>
 			<?php settings_fields( 'scapegoat_category options' ); ?>
-			<?php $options = get_option( 'scapegoat_category_options' ); ?>
+			<?php $options = get_option( 'scapegoat_category_options' ); 
+	
+			?>
 	<div class="wrap" id="arrr">
 		 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script>
 		$(document).ready(function () {
 			var data = JSON.parse('<?php if($options == false){ ?>{}<?php } echo json_encode($options); ?>');
+			//var data = JSON.parse('{}');
 			$("#cat").change(function () {
 	      		var cat_id = $("#cat option:selected").val();
 	      		$("input").each(function(){

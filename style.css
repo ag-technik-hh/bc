@@ -750,7 +750,7 @@ audio {
 .tags a,
 .tags a:active,
 .tags a:visited {
-	color: #6BB39B;
+	color: #ff8800;
 }
 .categories a:hover,
 .tags a:hover {
@@ -1763,7 +1763,7 @@ body {
 .widget a,
 .widget a:active,
 .widget a:visited {
-	color: #6bb39b;
+	color: #ff8800;
 }
 .widget a:hover {
 	color: #404040;

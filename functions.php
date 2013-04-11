@@ -28,7 +28,7 @@ function theme_by_get_cat()
 				
 				if(isset($options_[$category->cat_ID]) && $category->slug =  'uncategorized')
 				{
-					var_dump($category);
+					//var_dump($category);
 					//$cats_avail[] = $category;
 					$options = $options_[$category->cat_ID];
 				}
