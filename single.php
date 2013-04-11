@@ -2,7 +2,6 @@
 		
 		<!-- Mobiel Detect -->
 		<?php $detect = new Mobile_Detect(); ?>
-
 		<div id="container">
 			<div id="content">
 				<?php if(has_post_thumbnail()) : ?>

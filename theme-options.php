@@ -18,15 +18,250 @@ function scapegoat_add_init() {
 // Einstellungen registrieren (http://codex.wordpress.org/Function_Reference/register_setting)
 function theme_options_init(){
 	register_setting( 'scapegoat_options', 'scapegoat_theme_options', 'scapegoat_validate_options' );
+	register_setting( 'scapegoat_options', 'scapegoat_category_options' );
 }
 
 // Seite in der Dashboard-Navigation erstellen
 function theme_options_add_page() {
 	// Seitentitel, Titel in der Navi, Berechtigung zum Editieren (http://codex.wordpress.org/Roles_and_Capabilities) , Slug, Funktion
 	add_theme_page('Theme-Options', 'Theme-Options', 'edit_theme_options', 'theme-options', 'scapegoat_theme_options_page' );
+	add_theme_page('Category-Options', 'Category-Option', 'edit_theme_options', 'category-options', 'scapegoat_category_options_page' );
+
 }
 
 // Optionen-Seite erstellen
+
+function scapegoat_category_options_page()
+{
+	global $select_options, $radio_options;
+	if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+		$_REQUEST['settings-updated'] = false; 
+	}else{
+		 $options = get_option( 'scapegoat_category_options' ); 
+		 $options[$_POST["cat"]] = $_POST["scapegoat_category_options"][$_POST["cat"]];
+		 update_option('scapegoat_category_options',$options);
+	}
+
+
+	?>
+			<?php settings_fields( 'scapegoat_category options' ); ?>
+			<?php $options = get_option( 'scapegoat_category_options' ); ?>
+	<div class="wrap" id="arrr">
+		 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script>
+		$(document).ready(function () {
+			var data = JSON.parse('<?php if($options == false){ ?>{}<?php } echo json_encode($options); ?>');
+			$("#cat").change(function () {
+	      		var cat_id = $("#cat option:selected").val();
+	      		$("input").each(function(){
+	      			if($(this).attr("id") != undefined)
+	      			{
+	      				var new_name = $(this).attr("id").replace("$categorie", cat_id);
+	      				console.log(new_name);
+	      				$(this).attr("name", new_name);
+	      				if(cat_id in data && $(this).attr("id").replace("scapegoat_category_options[$categorie][", "").replace("]", "") in data[cat_id])
+	      				{
+	      					$(this).attr("value", data[cat_id][$(this).attr("id").replace("scapegoat_category_options[$categorie][", "").replace("]", "")]);
+	      				}
+	      				else
+	      				{
+	      					$(this).attr("value", "");
+	      				}
+	      			}
+	      		});
+	      		//console.log(value);
+	      	});
+	    });
+		</script>
+		<!-- Titel -->
+		<?php screen_icon(); ?><h2><?php _e('Scapegoat Category-Options','scapegoat'); ?></h2> 
+
+
+		<!-- Message -->
+		<?php if ( false !== $_REQUEST['settings-updated'] ) : ?>
+		<div class="updated fade">
+			<p><strong><?php _e('Settings saved!','scapegoat'); ?></strong></p>
+		</div>
+		<?php endif; ?>
+
+		<!-- Settings -->
+			<!-- SELECT CATEGORIE -->
+			<form method="post" action="themes.php?page=category-options">
+			<h3><?php _e('Category','scapegoat'); ?></h3>
+			<table class="form-table">
+				<tr valign="top">
+					<th scope="row"><?php _e('Category','scapegoat'); ?></th>
+					<td>
+						<label for="scapegoat_category_options[$categorie][id]">
+							<?php wp_dropdown_categories(); ?>
+						</label>
+					</td>
+				</tr>
+			</table>
+			
+			<h3><?php _e('Graphics','scapegoat'); ?></h3>
+			<p><?php printf(__('Choose an Image from your <a target="_blank" href="%s/wp-admin/upload.php">Library</a> or <a target="_blank" href="%s/wp-admin/media-new.php">upload</a> a new one.','scapegoat'), get_home_url(), get_home_url()); ?></p>
+			<table class="form-table">
+				<tr valign="top">
+					<th scope="row">Logo (Url)</th>
+					<td>
+						<input id="scapegoat_category_options[$categorie][logo]" class="regular-text" type="text" name="scapegoat_category_options[$categorie][logo]" value="<?php esc_attr_e( $options['logo'] ); ?>" />
+						<?php if($options['logo'] == TRUE) : ?>
+							<img style="max-width: 240px; vertical-align: top;margin: 0 0 0 20px;" src="<?php esc_attr_e( $options['logo'] ); ?>" alt="" />
+						<?php endif; ?>
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Touch Icon (URL)</th>
+					<td>
+						<input id="scapegoat_category_options[$categorie][icon]" class="regular-text" type="text" name="scapegoat_category_options[$categorie][icon]" value="<?php esc_attr_e( $options['icon'] ); ?>" />
+						<?php if($options['icon'] == TRUE) : ?>
+							<img style="max-width: 44px; vertical-align: top;margin: 0 0 0 20px;" src="<?php esc_attr_e( $options['icon'] ); ?>" alt="" />
+						<?php endif; ?>
+					</td>
+				</tr>
+			</table>
+			<h3><?php _e('Articles','scapegoat'); ?></h3>
+			<table class="form-table">
+				<tr valign="top">
+					<th scope="row"><?php _e('Excerpt','scapegoat'); ?></th>
+					<td>
+						<label for="scapegoat_category_options[$categorie][custom-excerpt]">
+							<input id="scapegoat_category_options[$categorie][custom-excerpt]" type="checkbox" name="scapegoat_category_options[$categorie][custom-excerpt]" value="1" <?php checked( '1', $options['custom-excerpt'] ); ?> /> <?php _e('automatic excerpts','scapegoat'); ?> <span class="description"><?php _e("if this is checked, you don't need more-tags",'scapegoat'); ?></span>
+						</label>
+					</td>
+				</tr>
+			</table>
+			<h3><?php _e('Navigation','scapegoat'); ?></h3>
+			<table class="form-table">
+				<!--<tr valign="top">
+					<th scope="row"><?php _e('Breadcrumb-Navigation','scapegoat'); ?></th>
+					<td>
+						<label for="scapegoat_category_options[$categorie][breadcrumb-show]">
+							<input id="scapegoat_category_options[$categorie][breadcrumb-show]" type="checkbox" name="scapegoat_category_options[$categorie][breadcrumb-show]" value="1" <?php checked( '1', $options['breadcrumb-show'] ); ?> /> <?php _e('show','scapegoat'); ?>
+						</label>
+					</td>
+				</tr>-->
+				<tr valign="top">
+					<th scope="row"><?php _e('Submenu','scapegoat'); ?></th>
+					<td>
+						<label for="scapegoat_category_options[$categorie][submenu-show]">
+							<input id="scapegoat_category_options[$categorie][submenu-show]" type="checkbox" name="scapegoat_category_options[$categorie][submenu-show]" value="1" <?php checked( '1', $options['submenu-show'] ); ?> /> <?php _e('show','scapegoat'); ?> <span class="description"><?php _e('at the top of the sidebar','scapegoat'); ?></span></td>
+						</label>
+					</td>
+				</tr>
+			</table>
+			<h3><?php _e('Frontpage','scapegoat'); ?></h3>
+			<table class="form-table">
+				<!--<tr valign="top">
+					<th scope="row"><?php _e('Frontpage Layout','scapegoat'); ?></th>
+					<td>
+						<label for="scapegoat_category_options[$categorie][frnt-page]">
+							<input id="scapegoat_category_options[$categorie][front-page]" type="checkbox" name="scapegoat_category_options[$categorie][front-page]" value="1" <?php checked( '1', $options['front-page'] ); ?> /> <?php _e('show','scapegoat'); ?> <span class="description"><?php _e('use custom frontpage layout','scapegoat'); ?></span></td>
+						</label>
+					</td>
+				</tr>-->
+				<tr valign="top">
+					<th scope="row"><?php _e('Header','scapegoat'); ?></th>
+					<td>
+						<label for="show-slider">
+							<input id="show-slider" type="radio" name="scapegoat_category_options[$categorie][header-option]" value="show-slider" <?php checked( 'show-slider' == $options['header-option'] ); ?> /> <?php _e('Slider','scapegoat'); ?>
+						</label>
+						<br />
+						<label for="show-header">
+							<input id="show-header" type="radio" name="scapegoat_category_options[$categorie][header-option]" value="show-header" <?php checked( 'show-header' == $options['header-option'] ); ?> /> <?php _e('Header','scapegoat'); ?>
+						</label>
+						<br />
+						<label for="show-none">
+							<input id="show-none" type="radio" name="scapegoat_category_options[$categorie][header-option]" value="show-none" <?php checked( 'show-none' == $options['header-option'] ); ?> /> <?php _e('Nothing','scapegoat'); ?>
+						</label>
+					</td>
+				</tr>
+			</table>
+				
+			<h3><?php _e('Slider-settings','scapegoat'); ?></h3>
+			<table class="form-table">
+				<tr valign="top">
+					<th scope="row"><?php _e('Category (ID)','scapegoat'); ?></th>
+					<td><input id="scapegoat_category_options[$categorie][slider-cat]" class="small-text" type="text" name="scapegoat_category_options[$categorie][slider-cat]" value="<?php esc_attr_e( $options['slider-cat'] ); ?>" /></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row"><?php _e('Amount of slides','scapegoat'); ?></th>
+					<td><input id="scapegoat_category_options[$categorie][slider-num]" class="small-text" type="text" name="scapegoat_category_options[$categorie][slider-num]" value="<?php esc_attr_e( $options['slider-num'] ); ?>" /> <span class="description"><?php _e('Slides','scapegoat'); ?></span></td>
+				</tr>
+			</table>
+
+
+
+			<h3><?php _e('Featured Links','scapegoat'); ?></h3>
+			<table class="form-table">
+				<tr valign="top">
+					<th scope="row">Link 1</th>
+					<td>
+						<input id="scapegoat_category_options[$categorie][featured-link-1]" class="regular-text" type="text" name="scapegoat_category_options[$categorie][featured-link-1]" value="<?php esc_attr_e( $options['featured-link-1'] ); ?>" /> <span class="description">URL</span><br />
+						<input id="scapegoat_category_options[$categorie][featured-link-title-1]" class="regular-text" type="text" name="scapegoat_category_options[$categorie][featured-link-title-1]" value="<?php esc_attr_e( $options['featured-link-title-1'] ); ?>" /> <span class="description"><?php _e('Title','scapegoat'); ?></span>
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Link 2</th>
+					<td>
+						<input id="scapegoat_category_options[$categorie][featured-link-2]" class="regular-text" type="text" name="scapegoat_category_options[$categorie][featured-link-2]" value="<?php esc_attr_e( $options['featured-link-2'] ); ?>" /> <span class="description">URL</span><br />
+						<input id="scapegoat_category_options[$categorie][featured-link-title-2]" class="regular-text" type="text" name="scapegoat_category_options[$categorie][featured-link-title-2]" value="<?php esc_attr_e( $options['featured-link-title-2'] ); ?>" /> <span class="description"><?php _e('Title','scapegoat'); ?></span>
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Link 3</th>
+					<td>
+						<input id="scapegoat_category_options[$categorie][featured-link-3]" class="regular-text" type="text" name="scapegoat_category_options[$categorie][featured-link-3]" value="<?php esc_attr_e( $options['featured-link-3'] ); ?>" /> <span class="description">URL</span><br />
+						<input id="scapegoat_category_options[$categorie][featured-link-title-3]" class="regular-text" type="text" name="scapegoat_category_options[$categorie][featured-link-title-3]" value="<?php esc_attr_e( $options['featured-link-title-3'] ); ?>" /> <span class="description"><?php _e('Title','scapegoat'); ?></span>
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Link 3</th>
+					<td>
+						<input id="scapegoat_category_options[$categorie][featured-link-4]" class="regular-text" type="text" name="scapegoat_category_options[$categorie][featured-link-4]" value="<?php esc_attr_e( $options['featured-link-4'] ); ?>" /> <span class="description">URL</span><br />
+						<input id="scapegoat_category_options[$categorie][featured-link-title-4]" class="regular-text" type="text" name="scapegoat_category_options[$categorie][featured-link-title-4]" value="<?php esc_attr_e( $options['featured-link-title-4'] ); ?>" /> <span class="description"><?php _e('Title','scapegoat'); ?></span>
+					</td>
+				</tr>
+			</table>
+			<h3><?php _e('Social Networks','scapegoat'); ?></h3>
+			<table class="form-table">
+				<tr valign="top">
+					<th scope="row"><span class="social-icon rss"></span> Feed</th>
+					<td><input id="scapegoat_category_options[$categorie][rss]" class="regular-text" type="text" name="scapegoat_category_options[$categorie][rss]" value="<?php esc_attr_e( $options['rss'] ); ?>" /> <span class="description"> <?php _e('if this is empty, the default Wordpress-feed will set','scapegoat'); ?></span></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row"><span class="social-icon twitter"></span> Twitter</th>
+					<td><input id="scapegoat_category_options[$categorie][twitter]" class="regular-text" type="text" name="scapegoat_category_options[$categorie][twitter]" value="<?php esc_attr_e( $options['twitter'] ); ?>" /></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row"><span class="social-icon facebook"></span> Facebook</th>
+					<td><input id="scapegoat_category_options[$categorie][facebook]" class="regular-text" type="text" name="scapegoat_category_options[$categorie][facebook]" value="<?php esc_attr_e( $options['facebook'] ); ?>" /></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row"><span class="social-icon google"></span> Google +</th>
+					<td><input id="scapegoat_category_options[$categorie][google]" class="regular-text" type="text" name="scapegoat_category_options[$categorie][google]" value="<?php esc_attr_e( $options['google'] ); ?>" /></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row"><span class="social-icon youtube"></span> Youtube</th>
+					<td><input id="scapegoat_category_options[$categorie][youtube]" class="regular-text" type="text" name="scapegoat_category_options[$categorie][youtube]" value="<?php esc_attr_e( $options['youtube'] ); ?>" /></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row"><span class="social-icon mail"></span> Newsletter</th>
+					<td><input id="scapegoat_category_options[$categorie][mail]" class="regular-text" type="text" name="scapegoat_category_options[$categorie][mail]" value="<?php esc_attr_e( $options['mail'] ); ?>" /></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row"><span class="social-icon podcast"></span> Podcast</th>
+					<td><input id="scapegoat_category_options[$categorie][podcast]" class="regular-text" type="text" name="scapegoat_category_options[$categorie][podcast]" value="<?php esc_attr_e( $options['podcast'] ); ?>" /></td>
+				</tr>
+			</table>
+			<!-- Submit -->
+			<p class="submit"><input type="submit" class="button-primary" value="<?php _e('Save','scapegoat'); ?>" /></p>
+		</form>
+	</div>
+<?php
+}
+
 function scapegoat_theme_options_page() {
 	global $select_options, $radio_options;
 	if ( ! isset( $_REQUEST['settings-updated'] ) )

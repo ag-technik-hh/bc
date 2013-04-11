@@ -5,7 +5,8 @@
 	<?php $detect = new Mobile_Detect(); ?>
 
 	<!-- load the Theme Options -->
-	<?php $options = get_option('scapegoat_theme_options'); ?>
+	
+		<?php $options = theme_by_get_cat() ?>
 
 	<head profile="http://gmpg.org/xfn/11">
 

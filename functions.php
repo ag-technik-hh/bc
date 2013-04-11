@@ -1,8 +1,53 @@
 <?php
 
 /* load theme options */
-$options = get_option('scapegoat_theme_options');
+function theme_by_get_cat()
+{
+	global $wp_query;
+	$cat_obj = $wp_query->get_queried_object();
+	$thisCat = $cat_obj->term_id;
+	$options_ = get_option('scapegoat_category_options');
+	$options = get_option('scapegoat_theme_options');
+	if(!is_home() && !is_front_page() || is_paged()) {
 
+		$cats_avail = array();
+		foreach (get_the_category($cat_obj->id) as $category) {
+			$objects[$category->cat_ID] = $category;
+		}
+
+		sort($objects);
+		$o_id = $wp_query->get_queried_object_id();
+		if(is_category() && isset($options_[$o_id]))
+		{
+
+			$options = $options_[$o_id];
+		}
+		else
+		{
+			foreach ($objects as $category) {
+				
+				if(isset($options_[$category->cat_ID]) && $category->slug =  'uncategorized')
+				{
+					var_dump($category);
+					//$cats_avail[] = $category;
+					$options = $options_[$category->cat_ID];
+				}
+			}
+		}
+
+		if(count($cats_avail) > 1)
+		{
+
+		}
+		elseif (count($cats_avail) == 1) {
+			
+		}
+
+
+	}
+	
+	return $options;
+}
 /* Mobile Detect */
 include 'functions/mobile_detect.php';
 
