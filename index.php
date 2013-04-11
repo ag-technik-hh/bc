@@ -47,6 +47,20 @@
 						<?php else : ?>
 							<?php the_excerpt(); ?>
 						<?php endif; ?>
+						<div class="meta">
+							<ul class="related">
+						<?php
+				$similar_posts = similar_articles($post->ID);
+			
+				if( $similar_posts != false && $similar_posts->have_posts() ) {
+				while ($similar_posts->have_posts()) : $similar_posts->the_post(); ?>
+				<li><a title="<?php the_title(); ?>" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+				<?php
+				endwhile;
+				}
+				?>
+				</ul>
+					</div>
 					</article><!-- .article -->
 					
 					
@@ -56,16 +70,7 @@
 							<?php the_tags(__('<aside class="tags">Tagged with: ','scapegoat'),', ','</aside>'); ?>
 						</footer><!-- .footer -->
 					<?php endif; ?>
-				<?php
-				$similar_posts = similar_articles($post->ID);
-				
-				if( $similar_posts != false && $similar_posts->have_posts() ) {
-				while ($similar_posts->have_posts()) : $similar_posts->the_post(); ?>
-				<a title="<?php the_title(); ?>" href="<?php the_permalink(); ?>"><?php the_title(); ?></a><br>
-				<?php
-				endwhile;
-				}
-				?>
+
 				</section><!-- .post -->
 
 				<?php endwhile; ?>

@@ -64,7 +64,6 @@ function similar_articles($id)
 	{
 		$tags = wp_get_post_tags($id);
 		if ($tags) {
-			echo 'Related Posts <br>';
 			$args=array(
 			'tag_in'	=> array($tags),
 			'post_not_in'	=> array($post->ID),

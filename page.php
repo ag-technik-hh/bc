@@ -40,6 +40,7 @@
 						<?php the_content(); ?>
 						<?php wp_link_pages('before=<nav class="pagination_post">'. __("Pages:","scapegoat") .'&after=</nav>'); ?>
 					</article>
+					
 				<?php
 				$similar_posts = similar_articles($post->ID);
 				if($similar_posts != false && $similar_posts->have_posts() ) {
