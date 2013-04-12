@@ -1,7 +1,7 @@
 <?php
 
 /* load theme options */
-function theme_by_get_cat()
+function get_options_by_cat()
 {
 	global $wp_query;
 	$cat_obj = $wp_query->get_queried_object();
@@ -24,13 +24,16 @@ function theme_by_get_cat()
 		}
 		else
 		{
-			foreach ($objects as $category) {
+			foreach ($objects as $id => $category) {
 				
 				if(isset($options_[$category->cat_ID]) && $category->slug =  'uncategorized')
 				{
 					//var_dump($category);
 					//$cats_avail[] = $category;
 					$options = $options_[$category->cat_ID];
+					$options["alt_category"] = $id;
+					echo $options["alt_category"];
+
 				}
 			}
 		}
@@ -187,6 +190,24 @@ function my_register_sidebars() {
 			'after_title' => '</h3>',
 		)
 	);
+
+	$options = get_option('scapegoat_category_options');
+	foreach($options as $id => $option)
+	{
+		register_sidebar(
+			array(
+				'id'=>'main-'.$id.'-sidebar',
+				'name'=>__('Main-'.$id.'-Sidebar','scapegoat'),
+				'description' => __('The default sidebar for pages with category-id '.$id.'.','scapegoat'),
+				'before_widget' => '<aside id="%1$s" class="widget widget-sidebar %2$s"><div class="widget-inner">',
+				'after_widget' => '</div></aside>',
+				'before_title' => '<h3 class="widget-title">',
+				'after_title' => '</h3>',
+			)
+		);
+	}
+
+
 }
 
 /* Add support for custom headers */

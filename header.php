@@ -6,7 +6,7 @@
 
 	<!-- load the Theme Options -->
 	
-		<?php $options = theme_by_get_cat() ?>
+		<?php $options = get_options_by_cat() ?>
 
 	<head profile="http://gmpg.org/xfn/11">
 
@@ -104,7 +104,17 @@
 				<div class="clear"></div>
 			</header><!-- header-inside -->
 		</div><!-- header-outside -->
+		<?php
+$sub_cats = get_categories('parent=8');
+if( $sub_cats ) foreach( $sub_cats as $sub_cat ) :
 
+  $sub_query = new WP_Query( array( 'category__in' => array( $sub_cat->term_id ), 'posts_per_page' => -1) );
+    if( $sub_query->have_posts() ) : while( $sub_query->have_posts() ) : $sub_query->the_post();
+   echo the_title();
+        endwhile; endif;
+
+endforeach;
+?>
 		<!-- Mobile Query -->
 		<?php if(!$detect->isMobile() || $detect->isTablet()) : ?>
 		<!-- Featured Container for Frontpage Slider and "Sidebar" -->
