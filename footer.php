@@ -2,7 +2,7 @@
 		</div><!-- wrapper-outside -->
 		<?php $options = get_option('scapegoat_theme_options'); ?>
 		<div id="footer-top-outside">
-			<aside id="footer-top-inside" class="inside">
+			<aside id="footer-top-inside" class="inside" role="navigation">
 				<div id="footer-social-links">
 					<?php if($options['rss']) : ?>
 						<a target="_blank" class="social-icon rss" href="<?php echo $options['rss']; ?>" title="Feed">Feed</a>
@@ -16,7 +16,7 @@
 					<?php if($options['mail']) : ?><a target="_blank" class="social-icon mail" href="<?php echo $options['mail']; ?>" title="Newsletter">Newsletter</a><?php endif; ?>
 					<?php if($options['podcast']) : ?><a target="_blank" class="social-icon podcast" href="<?php echo $options['podcast']; ?>" title="Podcast">Podcast</a><?php endif; ?>
 				</div><!-- footer-top-social -->
-				<div id="footer-search">
+				<div id="footer-search" role="search">
 					<?php get_search_form(); ?>
 				</div><!-- footer-top-search -->
 				<div class="clear"></div>

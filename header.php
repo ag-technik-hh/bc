@@ -58,7 +58,7 @@
 	<body <?php body_class(); ?>>
 		<div id="main-nav-outside">
 			<div id="main-nav-inside" class="inside">
-				<nav id="main-nav">
+				<nav id="main-nav" role="navigation">
 					<a href="#main-nav" class="menu-toggle"><?php _e('Navigation','scapegoat'); ?></a>
 					<?php wp_nav_menu(array('theme_location' => 'header', 'depth' => '0', 'fallback_cb' => fallback_menu, 'walker' => new My_Walker_Nav_Menu())); ?>
 					<div class="clear"></div>
@@ -68,7 +68,7 @@
 
 		<div id="header-outside">
 			<header id="header-inside" class="inside">
-				<figure id="logo">
+				<figure id="logo" role="banner">
 					<?php if($options['logo']) : ?>
 						<a title="<?php bloginfo('name'); ?>" href="<?php bloginfo('url'); ?>">
 							<img src="<?php echo $options['logo']; ?>" alt="<?php bloginfo('name'); ?>" />
@@ -83,7 +83,7 @@
 				</figure><!-- logo -->
 				<div id="description-outer">
 					<div id="description-inner">
-						<aside id="header-social-links">
+						<aside id="header-social-links" role="navigation">
 							<?php if($options['rss']) : ?>
 								<a target="_blank" class="social-icon rss" href="<?php echo $options['rss']; ?>" title="Feed">Feed</a>
 							<?php else : ?>

@@ -3,7 +3,7 @@
 		<!-- Mobiel Detect -->
 		<?php $detect = new Mobile_Detect(); ?>
 		<div id="container">
-			<div id="content">		
+			<div id="content" role="main">		
 			<div id="content-posts">	
 				<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 				<section id="post-<?php the_ID(); ?>" <?php if (is_front_page()) { post_class('front-post'); } else { post_class(); } ?>>
@@ -30,7 +30,7 @@
 								<?php the_title(); ?>
 							</a>
 						</h2><!-- .post-title -->
-						<aside class="info meta">
+						<aside class="info meta" role="group">
 							<span class="post-date"><?php the_time('j.m.y'); ?></span>
 							<span class="post-author"><?php the_author_posts_link(); ?></span>
 							<?php if(!has_post_format('status')) : ?>
@@ -66,7 +66,7 @@
 					
 					<?php if(!has_post_format('status')) : ?>
 						<footer class="footer meta">
-							<aside class="categories"><?php _e('Posted in: ','scapegoat'); ?><?php the_category(', '); ?></aside>
+							<aside class="categories" role="group"><?php _e('Posted in: ','scapegoat'); ?><?php the_category(', '); ?></aside>
 							<?php the_tags(__('<aside class="tags">Tagged with: ','scapegoat'),', ','</aside>'); ?>
 						</footer><!-- .footer -->
 					<?php endif; ?>
@@ -75,7 +75,7 @@
 
 				<?php endwhile; ?>
 				</div>
-					<nav id="pagination">
+					<nav id="pagination" role="navigation">
 						<?php if( function_exists('wp_pagination_navi') ) : ?>
 							<?php wp_pagination_navi(); ?>
 						<?php else : ?>
