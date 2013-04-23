@@ -2567,6 +2567,22 @@ ul#smart-archives-block li span.empty-month {
 	color: #fff;
 }
 
+a.skip-link {
+    display: inline;
+    left: -9999px;
+    position: absolute;
+    top: auto;
+}
+a.skip-link:focus, a.skip-link:active {
+    background: none repeat scroll 0 0 #000000;
+    border: 1px dotted #FF9F40;
+    color: #FF9F40;
+    display: block;
+    left: 0;
+    margin-bottom: 2px;
+    padding: 2px;
+    top: 30px;
+}
 
 /* __________________________________________________________________.11 Media Queries */
 

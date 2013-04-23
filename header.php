@@ -56,6 +56,8 @@
 		<?php wp_head(); ?>
 	</head>
 	<body <?php body_class(); ?>>
+		<a class="skip-link" href="#content">Zum Inhalt</a>
+		
 		<div id="main-nav-outside">
 			<div id="main-nav-inside" class="inside">
 				<nav id="main-nav" role="navigation">
