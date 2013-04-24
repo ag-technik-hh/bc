@@ -3,7 +3,7 @@
 		<!-- Mobiel Detect -->
 		<?php $detect = new Mobile_Detect(); ?>
 
-		<div id="container">
+		<div id="container" role="main">
 			
 			<div id="full">
 			

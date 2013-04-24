@@ -63,11 +63,11 @@
 					</div>
 					</article><!-- .article -->
 					
-					
 					<?php if(!has_post_format('status')) : ?>
 						<footer class="footer meta">
 							<aside class="categories" role="group"><?php _e('Posted in: ','scapegoat'); ?><?php the_category(', '); ?></aside>
-							<?php the_tags(__('<aside class="tags">Tagged with: ','scapegoat'),', ','</aside>'); ?>
+							<?php the_tags(__('<aside class="tags" role="group">Tagged with: ','scapegoat'),', ','</aside>'); ?>
+							<a class="back-link" href="#main-nav-outside" title="Zurück zum Anfang springen">Zurück zum Anfang</a>
 						</footer><!-- .footer -->
 					<?php endif; ?>
 

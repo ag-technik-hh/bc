@@ -3,7 +3,7 @@
 		<!-- Mobiel Detect -->
 		<?php $detect = new Mobile_Detect(); ?>
 		<div id="container">
-			<div id="content">
+			<div id="content" role="main">
 				<?php if(has_post_thumbnail()) : ?>
 					<figure class="post-image">
 						<?php $image_id = get_post_thumbnail_id();$image_url = wp_get_attachment_image_src($image_id,'full', true); ?>
@@ -67,17 +67,17 @@
 					<span class="post-nav-prev"><?php previous_post_link('%link', __('Last','scapegoat')); ?></span>
 				</nav><!-- .post-nav -->
 			
-				<aside class="post-info">
+				<aside class="post-info" role="group">
 					<span class="post-date">
 						<?php the_time('j.m.y'); ?>
 					</span>
-					<aside class="categories">
+					<aside class="categories" role="group">
 						<?php _e('Posted in: ','scapegoat'); ?><?php the_category(', '); ?>
 					</aside>
 					<?php the_tags(__('<aside class="tags">Tagged with: ','scapegoat'),', ','</aside>'); ?>
 				</aside><!-- .post-info -->
 			
-				<aside class="author-meta">
+				<aside class="author-meta" role="complementary">
 					<figure class="author_avatar">
 						<?php if (function_exists('get_avatar')) { echo get_avatar(get_the_author_email(), 60); }?>
 					</figure>

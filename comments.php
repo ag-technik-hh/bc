@@ -10,7 +10,7 @@
 ?>
 
 <?php if (have_comments()) : ?>
-	<div id="comments-wrapper">
+	<div id="comments-wrapper" role="complementary">
 		<h3 id="comments"><?php	printf( _n( 'One comment', '%1$s comments', get_comments_number(),'scapegoat' ), number_format_i18n( get_comments_number() )); ?></h3>
 		<?php if ((int) get_option('page_comments') === 1): ?>
 			<nav class="post-nav">
@@ -30,7 +30,7 @@
 		<?php endif; ?>
 	</div>
 <?php else : // this is displayed if there are no comments so far ?>
-	<div id="comments-wrapper">
+	<div id="comments-wrapper" role="complementary">
 		<?php if (comments_open()) : ?>
 			<!-- If comments are open, but there are no comments. -->
 		 <?php else : // comments are closed ?>

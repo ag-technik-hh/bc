@@ -4,7 +4,7 @@
 		<?php $detect = new Mobile_Detect(); ?>
 		
 		<div id="container">
-			<div id="content">
+			<div id="content" role="main">
 				<?php if(function_exists('breadcrumb')) : ?>
 					<?php breadcrumb(); ?> 
 				<?php endif; ?>
@@ -82,7 +82,7 @@
 										<span class="post-date"><?php the_time('j.m.y'); ?></span>
 										<span class="post-author"><?php the_author_posts_link(); ?></span>
 										<aside class="categories"><?php _e('Posted in: ','scapegoat'); ?><?php the_category(', '); ?></aside>
-										<?php the_tags(__('<aside class="tags">Tagged with: ','scapegoat'),', ','</aside>'); ?>
+										<?php the_tags(__('<aside class="tags" role="group">Tagged with: ','scapegoat'),', ','</aside>'); ?>
 									</aside>
 								</header>
 								<div class="clear"></div>

@@ -2578,10 +2578,26 @@ a.skip-link:focus, a.skip-link:active {
     border: 1px dotted #FF9F40;
     color: #FF9F40;
     display: block;
-    left: 0;
+    left: 0px;
     margin-bottom: 2px;
     padding: 2px;
-    top: 30px;
+    top: 0px;
+}
+
+a.back-link {
+    display: inline;
+    left: -9999px;
+    position: absolute;
+    top: auto;
+}
+a.back-link:focus, a.back-link:active {
+    border: 1px dotted #FF9F40;
+    color: #FF9F40;
+    display: inline;
+    left: 465px;
+    padding: 2px;
+    position: relative;
+    top: 0px;
 }
 
 /* __________________________________________________________________.11 Media Queries */

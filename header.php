@@ -56,7 +56,7 @@
 		<?php wp_head(); ?>
 	</head>
 	<body <?php body_class(); ?>>
-		<a class="skip-link" href="#content">Zum Inhalt</a>
+		<a class="skip-link" href="#content" title="Zum Inhalt springen">Zum Inhalt</a>
 		
 		<div id="main-nav-outside">
 			<div id="main-nav-inside" class="inside">
@@ -93,7 +93,7 @@
 							<?php endif; ?>
 							<?php if($options['twitter']) : ?><a target="_blank" class="social-icon twitter" href="<?php echo $options['twitter']; ?>" title="Twitter">Twitter</a><?php endif; ?>
 							<?php if($options['facebook']) : ?><a target="_blank" class="social-icon facebook" href="<?php echo $options['facebook']; ?>" title="Facebook">Facebook</a><?php endif; ?>
-							<?php if($options['google']) : ?><a target="_blank" class="social-icon google" href="<?php echo $options['google']; ?>" title="Google +">Google +</a><?php endif; ?>
+							<?php if($options['google']) : ?><a target="_blank" class="social-icon google" href="<?php echo $options['google']; ?>" title="GooglePlus">Google +</a><?php endif; ?>
 							<?php if($options['youtube']) : ?><a target="_blank" class="social-icon youtube" href="<?php echo $options['youtube']; ?>" title="Youtube">Youtube</a><?php endif; ?>
 							<?php if($options['mail']) : ?><a target="_blank" class="social-icon mail" href="<?php echo $options['mail']; ?>" title="Newsletter">Newsletter</a><?php endif; ?>
 							<?php if($options['podcast']) : ?><a target="_blank" class="social-icon podcast" href="<?php echo $options['podcast']; ?>" title="Podcast">Podcast</a><?php endif; ?>
@@ -158,7 +158,7 @@ endforeach;
 						</div><!-- slideshow -->
 						<?php if($options['featured-link-1'] && $options['featured-link-2'] && $options['featured-link-3'] && $options['featured-link-4']) : ?>
 							<div id="front-page-adverts">
-								<aside id="featured-links">
+								<aside id="featured-links" role="navigation">
 									<ul>
 										<li>
 											<a target="_blank" class="featured-link" href="<?php echo $options['featured-link-1']; ?>" title="<?php echo $options['featured-link-title-1']; ?>">

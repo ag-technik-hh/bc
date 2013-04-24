@@ -2,7 +2,7 @@
 
 		<div id="container">
 			
-			<div id="content">
+			<div id="content" role="main">
 
 				<?php if(function_exists('breadcrumb')) : ?>
 					<?php breadcrumb(); ?> 
@@ -37,7 +37,7 @@
 										<?php the_title(); ?>
 									</a>
 								</h2>
-								<aside class="meta">
+								<aside class="meta" role="group">
 									<span class="post-date"><?php the_time('j.m.y'); ?></span>
 									<span class="post-author"><?php the_author_posts_link(); ?></span>
 								</aside>
