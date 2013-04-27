@@ -1,6 +1,5 @@
-
 <section id="sidebar">
-	<?php //if (function_exists('submenu') && $options['submenu-show']) { submenu(); } ?>
+	<?php // if (function_exists('submenu')) { submenu(); } ?>
 
 	<?php
 	if(isset($options["alt_category"]) &&  !empty($options["alt_category"]))
