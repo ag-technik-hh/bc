@@ -2519,15 +2519,29 @@ ul.active-submenu li ul li ul{
 
 @media only screen and (min-width: 800px)  {
 
-	.menu-top-menu-container > ul.active-submenu > li > ul {
+
+	#menu-placeholder{
+		clear: both;	
+		height: 35px;
+	}
+	.menu-top-menu-container > ul.active-submenu > li.has-children > ul {
 		padding: 0;
 		list-style: none;
 		width: 100%;
 		background-color: #757575;
 		height: 35px;
-		margin-top:  -48px;
+		margin-top:  0px;
 		position: absolute;
 		
+	}
+
+
+	.menu-top-menu-container > ul.active-submenu > li{
+		margin: 0;
+		padding: 0;
+		line-height: 0;
+
+
 	}
 
 	.menu-top-menu-container > ul.active-submenu > li ul li.current-menu-ancestor, .menu-top-menu-container > ul.active-submenu > li ul li.current-menu-item{
@@ -2546,15 +2560,15 @@ ul.active-submenu li ul li ul{
 		width: 100%;
 	}
 
-	ul.active-submenu li ul li.current-menu-ancestor ul li, ul.active-submenu li ul li.current-menu-item ul li{
+	.menu-top-menu-container > ul.active-submenu > li > ul > li.current-menu-ancestor > ul > li, .menu-top-menu-container > ul.active-submenu > li > ul li.current-menu-item > ul > li{
 		float: left;
 		display: inline-block;
 		background-color: #ff000;
 		color: #bfbfbf;
-		margin-top: 5px;
+		margin-top: 8px;
 	}
 
-	ul.active-submenu li ul li.current-menu-ancestor ul li, ul.active-submenu li ul li.current-menu-item ul li{
+	.menu-top-menu-container > ul.active-submenu > li > ul > li.current-menu-ancestor > ul > li, ul.active-submenu > li > ul > li.current-menu-item > ul > li{
 
 		/*color: #bfbfbf!important;*/
 		margin-left: 10px;
@@ -2568,6 +2582,11 @@ ul.active-submenu li ul li ul{
 		color: #fff;
 		line-height: 1;
 		height: ;
+	}
+
+
+	ul.active-submenu li ul li.current-menu-ancestor ul li.current-menu-item a, ul.active-submenu li ul li.current-menu-item ul li.current-menu-item a{
+		color: #bfbfbf;
 	}
 }
 
