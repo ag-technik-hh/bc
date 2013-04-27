@@ -67,7 +67,7 @@
 				</nav><!-- main-nav -->
 			</div><!-- main-nav-inside -->
 		</div><!-- main-nav-outside -->
-
+		<?php wp_nav_menu(array('theme_location' => 'header', 'menu_class' => 'active-submenu', 'depth' => '0', 'fallback_cb' => fallback_menu, 'walker' => new My_Walker_Nav_Menu())); ?>
 		<div id="header-outside">
 			<header id="header-inside" class="inside">
 				<figure id="logo" role="banner">
