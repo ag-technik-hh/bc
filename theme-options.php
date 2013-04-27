@@ -67,7 +67,39 @@ function scapegoat_category_options_page()
 	      				$(this).attr("name", new_name);
 	      				if(cat_id in data && $(this).attr("id").replace("scapegoat_category_options[$categorie][", "").replace("]", "") in data[cat_id])
 	      				{
-	      					$(this).attr("value", data[cat_id][$(this).attr("id").replace("scapegoat_category_options[$categorie][", "").replace("]", "")]);
+
+						if($(this).attr("type") == "text")
+						{
+							console.log("text");
+							console.log(data[cat_id][$(this).attr("id").replace("scapegoat_category_options[$categorie][", "").replace("]", "")]);
+	      						$(this).attr("value", data[cat_id][$(this).attr("id").replace("scapegoat_category_options[$categorie][", "").replace("]", "")]);
+						}
+						else if($(this).attr("type") == "checkbox")
+						{
+
+							console.log("checkbox");
+							console.log(data[cat_id][$(this).attr("id").replace("scapegoat_category_options[$categorie][", "").replace("]", "")]);
+							if(data[cat_id][$(this).attr("id").replace("scapegoat_category_options[$categorie][", "").replace("]", "")] == "1")
+							{
+								$(this).attr('checked', true);		
+							
+							} else {
+
+								$(this).attr('checked', false);
+							}
+						} else {
+
+							console.log("radio");
+							console.log(data[cat_id][$(this).attr("id").replace("scapegoat_category_options[$categorie][", "").replace("]", "")]);
+							if(data[cat_id][$(this).attr("id").replace("scapegoat_category_options[$categorie][", "").replace("]", "")] == $(this).attr("value"))
+							{
+								$(this).attr('checked', true);		
+							
+							} else {
+
+								$(this).attr('checked', false);
+							}
+						}
 	      				}
 	      				else
 	      				{
@@ -170,16 +202,16 @@ function scapegoat_category_options_page()
 				<tr valign="top">
 					<th scope="row"><?php _e('Header','scapegoat'); ?></th>
 					<td>
-						<label for="show-slider">
-							<input id="show-slider" type="radio" name="scapegoat_category_options[$categorie][header-option]" value="show-slider" <?php checked( 'show-slider' == $options['header-option'] ); ?> /> <?php _e('Slider','scapegoat'); ?>
+						<label for="scapegoat_category_options[$categorie][header-option]">
+							<input id="scapegoat_category_options[$categorie][header-option]" type="radio" name="scapegoat_category_options[$categorie][header-option]" value="show-slider" <?php checked( 'show-slider' == $options['header-option'] ); ?> /> <?php _e('Slider','scapegoat'); ?>
 						</label>
 						<br />
 						<label for="show-header">
-							<input id="show-header" type="radio" name="scapegoat_category_options[$categorie][header-option]" value="show-header" <?php checked( 'show-header' == $options['header-option'] ); ?> /> <?php _e('Header','scapegoat'); ?>
+							<input id="scapegoat_category_options[$categorie][header-option]" type="radio" name="scapegoat_category_options[$categorie][header-option]" value="show-header" <?php checked( 'show-header' == $options['header-option'] ); ?> /> <?php _e('Header','scapegoat'); ?>
 						</label>
 						<br />
 						<label for="show-none">
-							<input id="show-none" type="radio" name="scapegoat_category_options[$categorie][header-option]" value="show-none" <?php checked( 'show-none' == $options['header-option'] ); ?> /> <?php _e('Nothing','scapegoat'); ?>
+							<input id="scapegoat_category_options[$categorie][header-option]" type="radio" name="scapegoat_category_options[$categorie][header-option]" value="show-none" <?php checked( 'show-none' == $options['header-option'] ); ?> /> <?php _e('Nothing','scapegoat'); ?>
 						</label>
 					</td>
 				</tr>
