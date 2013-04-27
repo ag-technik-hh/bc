@@ -2524,7 +2524,7 @@ ul.active-submenu li ul li ul{
 		list-style: none;
 		width: 100%;
 		background-color: #757575;
-		height: 35px;
+		height: 0px;
 		margin-top:  -48px;
 		position: absolute;
 		
@@ -2536,6 +2536,7 @@ ul.active-submenu li ul li ul{
 		max-width: 1140px;
 		margin: 0 auto;
 		background-color: #757575;
+		height: 35px;
 		
 		
 	}
