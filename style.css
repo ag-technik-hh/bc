@@ -2540,6 +2540,7 @@ ul.active-submenu li ul li ul{
 		margin: 0;
 		padding: 0;
 		line-height: 0;
+		height: 0;
 
 
 	}

@@ -9,47 +9,32 @@ function get_options_by_cat()
 	$options_ = get_option('scapegoat_category_options');
 	$options = get_option('scapegoat_theme_options');
 	if(!is_home() && !is_front_page() || is_paged()) {
-
-		$cats_avail = array();
-		foreach (get_the_category($cat_obj->id) as $category) {
-			$objects[$category->cat_ID] = $category;
-		}
-		if(isset($objects) && $objects != null)
-		{
-			sort($objects);
-			$o_id = $wp_query->get_queried_object_id();
-			if(is_category() && isset($options_[$o_id]))
-			{
-
-				$options = $options_[$o_id];
-			}
-			else
-			{
-				foreach ($objects as $id => $category) {
-					
-					if(isset($options_[$category->cat_ID]) && $category->slug =  'uncategorized')
-					{
-						//var_dump($category);
-						//$cats_avail[] = $category;
-						$options = $options_[$category->cat_ID];
-						$options["alt_category"] = $id;
-
-					}
-				}
-			}
-
-		}
-
-		if(count($cats_avail) > 1)
-		{
-
-		}
-		elseif (count($cats_avail) == 1) {
 			
-		}
-
-
+			$cat_data = get_the_category();
+			$cat_data = (array) $cat_data[0];
+			if(!isset($cat_data["term_id"]))
+				$cat_data = (array)get_category($thisCat);
+			
+			while(isset($cat_data["term_id"]) && $cat_data["term_id"] != null && $cat_data["term_id"] != "") {
+				if(isset($options_[$cat_data["term_id"]]))
+				{
+					$options = $options_[$cat_data["term_id"]];
+					$options["opt_id"] = $cat_data["term_id"];
+					break;
+					
+				}elseif(isset($options_[$cat_data["parent"]]))
+				{
+                                        $options = $options_[$cat_data["parent"]];
+					$options["opt_id"] = $cat_data["parent"];
+                                        break;
+				}elseif(isset($cat_data["parent"]))
+				{
+					$cat_data = (array)get_category($cat_data["parent"]);
+				}		
+			
+			}
 	}
+	
 	
 	return $options;
 }

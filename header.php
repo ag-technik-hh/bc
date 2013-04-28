@@ -73,12 +73,12 @@
 			<header id="header-inside" class="inside">
 				<figure id="logo" role="banner">
 					<?php if($options['logo']) : ?>
-						<a title="<?php bloginfo('name'); ?>" href="<?php bloginfo('url'); ?>">
+						<a title="<?php bloginfo('name'); ?>" href="<?php if(isset($options["opt_id"])){echo get_category_link($options["opt_id"] );} else {bloginfo('url');} ?>">
 							<img src="<?php echo $options['logo']; ?>" alt="<?php bloginfo('name'); ?>" />
 						</a>
 					<?php else : ?>
 						<span id="logo-text">
-							<a title="<?php bloginfo('name'); ?>" href="<?php bloginfo('url'); ?>">
+							<a title="<?php bloginfo('name'); ?>" href=""<?php if(isset($options["opt_id"])){echo get_category_link($options["opt_id"] );} else {bloginfo('url');} ?>">
 								<?php bloginfo('name'); ?>
 							</a>
 						</span>
