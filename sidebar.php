@@ -1,4 +1,7 @@
 <section id="sidebar">
+	<div id="sidebar-title">
+		<h2>Sidebar</h2>
+	</div>
 	<?php // if (function_exists('submenu')) { submenu(); } ?>
 
 	<?php
