@@ -1242,6 +1242,12 @@ body {
 	font-family: 'Abel', 'Helvetica Neue', 'Arial', Sans-Serif;
 	color: #bfbfbf;
 }
+#header-title-hidden {
+    display: inline;
+    left: -9999px;
+    position: absolute;
+    top: auto;
+}
 #header-social-links {
 	margin: 0 auto 10px;
 	text-align: right;
@@ -1305,6 +1311,13 @@ body {
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
+#sidebar-title {
+    display: inline;
+    left: -9999px;
+    position: absolute;
+    top: auto;
+}
+
 
 	/* ------------------------------ Footer */
 
