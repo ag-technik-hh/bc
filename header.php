@@ -105,6 +105,7 @@
 					</div><!-- discription-inner -->
 				</div><!-- discription-outer -->
 				<div class="clear"></div>
+				<h1 id="header-title-hidden">Piratenpartei Hamburg</h1>
 			</header><!-- header-inside -->
 		</div><!-- header-outside -->
 
